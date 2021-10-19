@@ -48,7 +48,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
   Color checkTypeOfButton(String buttonText) {
-    print(buttonText);
     if(buttonText == '+' || buttonText == '-' || buttonText == 'x' || buttonText == '/' || buttonText == '=') {
       return operatorButtonColor;
     }

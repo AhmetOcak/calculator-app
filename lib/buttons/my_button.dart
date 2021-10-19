@@ -9,7 +9,7 @@ class MyButton extends StatelessWidget {
   final String buttonText;
   final VoidCallback buttonTapped;
 
-  MyButton({required this.color, required this.textColor, required this.buttonText, required this.buttonTapped});
+  const MyButton({required this.color, required this.textColor, required this.buttonText, required this.buttonTapped});
 
   @override
   Widget build(BuildContext context) {
