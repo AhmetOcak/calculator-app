@@ -10,7 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String userText = '10';
+  String userText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Text(
-                    userText,
-                    style: myTextStyle,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Text(
+                      userText, 
+                      style: myTextStyle,
+                    ),
                   ),
                 ),
               ],
@@ -59,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     MyButton(
                       color: operatorButtonColor,
-                      buttonText: '/',
+                      buttonText: '÷',
                       buttonTapped: () {},
                     ),
                   ],
@@ -73,22 +76,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '7',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('7');},
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '8',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('8');},
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '9',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('9');},
                     ),
                     MyButton(
                       color: operatorButtonColor,
-                      buttonText: 'X',
-                      buttonTapped: () {},
+                      buttonText: 'x',
+                      buttonTapped: () {updateUserText('x');},
                     ),
                   ],
                 ),
@@ -101,22 +104,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '4',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('4');},
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '5',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('5');},
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '6',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('6');},
                     ),
                     MyButton(
                       color: operatorButtonColor,
                       buttonText: '-',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('-');},
                     ),
                   ],
                 ),
@@ -129,22 +132,22 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '1',
-                      buttonTapped: () {updateUserText();},
+                      buttonTapped: () {updateUserText('1');},
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '2',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('2');},
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '3',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('3');},
                     ),
                     MyButton(
                       color: operatorButtonColor,
                       buttonText: '+',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('+');},
                     ),
                   ],
                 ),
@@ -157,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '0',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('0');},
                     ),
                     MyButton(
                       color: numberButtonColor,
@@ -167,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: ',',
-                      buttonTapped: () {},
+                      buttonTapped: () {updateUserText('.');},
                     ),
                     MyButton(
                       color: operatorButtonColor,
@@ -201,9 +204,18 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void updateUserText() {
-    setState(() {
-      userText += '4';
-    });
+  void updateUserText(String text) {
+    if(textLimitControl()) {
+      setState(() {
+        userText += text;
+      });
+    }
+  }
+
+  bool textLimitControl(){
+    if(userText.length != 8) {
+      return true;
+    }
+    return false;
   }
 }
