@@ -11,38 +11,11 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  List<String> buttons = [
-  'AC', 'DEL', '%', '/',
-  '7', '8', '9', 'x',
-  '4', '5', '6', '-',
-  '1', '2', '3', '+',
-  '0', '.', '=',
-];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(),
-          ),
-          Expanded(
-            flex: 3,
-            child: GridView.builder(
-              itemCount: buttons.length, 
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-              ),
-              itemBuilder: (BuildContext context, int index) {
-                return MyButton(color: checkTypeOfButton(buttons[index]), textColor: numberTextColor, buttonText: buttons[index], buttonTapped: () {});
-              },
-            ),
-          ),
-        ],
-      ),
+      body: Column(),
     );
   }
 

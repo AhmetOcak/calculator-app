@@ -17,14 +17,17 @@ class MyButton extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(10.0),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(50),
           child: Container(
             color: color,
-            child: Text(
-              buttonText,
-              style: TextStyle(
-                color: textColor,
-                fontSize: 20,
+            child: Center(
+              child: Text(
+                buttonText,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 30,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
