@@ -10,7 +10,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String userText = '';
+  String userText = '111';
+  String firstText = '421421';
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,23 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
+                Container(
+                  color: Colors.yellow,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 150,),
+                    child: Text(
+                      firstText, 
+                      style: const TextStyle(fontSize: 45, color: Colors.grey, fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ),
+                Container(
+                  color: Colors.red,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
                     child: Text(
                       userText, 
-                      style: myTextStyle,
+                      style: const TextStyle(fontSize: 90, color: Colors.white, fontWeight: FontWeight.w300),
                     ),
                   ),
                 ),
