@@ -6,5 +6,7 @@ const Color funcButtonColor = Color(0xFF9B9C9C);
 const Color numberTextColor = Color(0xFFFDFEFE);
 const Color backgroundColor = Color(0xFF000000);
 const Color dividerColor = Color(0xFF0C0C0C);
+const Color splashColor = Color(0xFFFFFFFF);
 
-
+const TextStyle myTextStyle =
+    TextStyle(fontSize: 90, color: Colors.white, fontWeight: FontWeight.w300);

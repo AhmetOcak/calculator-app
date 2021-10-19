@@ -1,38 +1,38 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:calculator_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   
   final Color color;
-  final Color textColor;
+  final Color textColor = numberTextColor;
   final String buttonText;
   final VoidCallback buttonTapped;
 
-  const MyButton({required this.color, required this.textColor, required this.buttonText, required this.buttonTapped});
+  const MyButton({required this.color, required this.buttonText, required this.buttonTapped});
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Padding(
-        padding: EdgeInsets.all(10.0),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(50),
-          child: Container(
-            color: color,
-            child: Center(
-              child: Text(
-                buttonText,
-                style: TextStyle(
-                  color: textColor,
-                  fontSize: 30,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
+    return RawMaterialButton(
+      onPressed: buttonTapped,
+      splashColor: splashColor,
+      shape: CircleBorder(),
+      constraints: BoxConstraints(
+          minHeight: MediaQuery.of(context).size.height / 10,
+          minWidth: MediaQuery.of(context).size.width / 4,
+      ),
+      child: Center(
+        child: Text(  
+          buttonText,
+          style: TextStyle(
+            color: textColor,
+            fontSize: 40,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),
+      fillColor: color,
     );
   }
 }
