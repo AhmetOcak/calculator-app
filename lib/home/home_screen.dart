@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:calculator_app/constants/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: Container(
         
       ),
     );
