@@ -13,8 +13,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String userText = '';
-  String tempText = '';
+  String _userText = '';
+  String _tempText = '';
   double _result = 0.0;
 
   @override
@@ -24,222 +24,21 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          ResultScreen(tempText: tempText, userText: userText),
-          Expanded(
-            flex: 3,
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyButton(
-                      color: funcButtonColor,
-                      buttonText: 'C',
-                      buttonTapped: () {
-                        killText();
-                      },
-                    ),
-                    MyButton(
-                      color: funcButtonColor,
-                      buttonText: 'DEL',
-                      buttonTapped: () {
-                        deleteText();
-                      },
-                    ),
-                    MyButton(
-                      color: funcButtonColor,
-                      buttonText: '%',
-                      buttonTapped: () {
-                        updateUserText('%');
-                        uptateTempText();
-                      },
-                    ),
-                    MyButton(
-                      color: operatorButtonColor,
-                      buttonText: '÷',
-                      buttonTapped: () {
-                        updateUserText('÷');
-                        uptateTempText();
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 70,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '7',
-                      buttonTapped: () {
-                        updateUserText('7');
-                      },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '8',
-                      buttonTapped: () {
-                        updateUserText('8');
-                      },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '9',
-                      buttonTapped: () {
-                        updateUserText('9');
-                      },
-                    ),
-                    MyButton(
-                      color: operatorButtonColor,
-                      buttonText: 'x',
-                      buttonTapped: () {
-                        updateUserText('x');
-                        uptateTempText();
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 70,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '4',
-                      buttonTapped: () {
-                        updateUserText('4');
-                      },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '5',
-                      buttonTapped: () {
-                        updateUserText('5');
-                      },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '6',
-                      buttonTapped: () {
-                        updateUserText('6');
-                      },
-                    ),
-                    MyButton(
-                      color: operatorButtonColor,
-                      buttonText: '-',
-                      buttonTapped: () {
-                        updateUserText('-');
-                        uptateTempText();
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 70,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '1',
-                      buttonTapped: () {
-                        updateUserText('1');
-                      },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '2',
-                      buttonTapped: () {
-                        updateUserText('2');
-                      },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '3',
-                      buttonTapped: () {
-                        updateUserText('3');
-                      },
-                    ),
-                    MyButton(
-                      color: operatorButtonColor,
-                      buttonText: '+',
-                      buttonTapped: () {
-                        updateUserText('+');
-                        uptateTempText();
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 70,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MyZeroButton(
-                      color: numberButtonColor,
-                      buttonText: '0',
-                      buttonTapped: () {
-                        updateUserText('0');
-                      },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: ',',
-                      buttonTapped: () {
-                        updateUserText('.');
-                      },
-                    ),
-                    MyButton(
-                      color: operatorButtonColor,
-                      buttonText: '=',
-                      buttonTapped: () {
-                        uptateTempText();
-                        _result = Calculate().calculate(tempText);
-                        killText();
-                        updateUserText(_result.toString());
-                      },
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height / 50,
-                ),
-              ],
-            ),
-          ),
+          ResultScreen(tempText: _tempText, userText: _userText),
+          buttonScreen(context),
         ],
       ),
     );
   }
 
-  Color checkTypeOfButton(String buttonText) {
-    if (buttonText == '+' ||
-        buttonText == '-' ||
-        buttonText == 'x' ||
-        buttonText == '/' ||
-        buttonText == '=') {
-      return operatorButtonColor;
-    } else if (buttonText == 'AC' || buttonText == 'DEL' || buttonText == '%') {
-      return funcButtonColor;
-    } else {
-      return numberButtonColor;
-    }
-  }
-
   void updateUserText(String text) {
-    if (textLimitControl()) {
+    if (textLimitControl(text)) {
       setState(() {
-        userText += text;
+        _userText += text;
         // Prevents the first character from being an operator.
-        if(userText.length == 1) {
-          if(isItOperator(text)) {
-            userText = '';
+        if (_userText.length == 1) {
+          if (isItOperator(text)) {
+            _userText = '';
           }
         }
       });
@@ -248,39 +47,219 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void uptateTempText() {
     setState(() {
-      if(userText.isNotEmpty) {
-        tempText += userText;
-        userText = '';
+      if (_userText.isNotEmpty) {
+        _tempText += _userText;
+        _userText = '';
       }
     });
   }
 
   void killText() {
     setState(() {
-      userText = '';
-      tempText = '';
+      _userText = '';
+      _tempText = '';
     });
   }
 
   void deleteText() {
     setState(() {
-      if(userText.isNotEmpty) {
-        userText = userText.substring(0, userText.length - 1);
+      if (_userText.isNotEmpty) {
+        _userText = _userText.substring(0, _userText.length - 1);
       }
     });
   }
 
   bool isItOperator(String text) {
-    if(text != 'x' && text != '÷' && text != '+' && text != '-' && text != '%' && text != '.') {
+    if (text != 'x' &&
+        text != '÷' &&
+        text != '+' &&
+        text != '-' &&
+        text != '%' &&
+        text != '.') {
       return false;
     }
     return true;
   }
 
-  bool textLimitControl() {
-    if (userText.length != 8) {
+  bool textLimitControl(String text) {
+    if (_userText.length == 8 && isItOperator(text)) {
+      return true;
+    } else if (_userText.length != 8) {
       return true;
     }
     return false;
+  }
+
+  Expanded buttonScreen(BuildContext context) {
+    return Expanded(
+      flex: 3,
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MyButton(
+                buttonText: 'C',
+                buttonTapped: () {
+                  killText();
+                },
+              ),
+              MyButton(
+                buttonText: 'DEL',
+                buttonTapped: () {
+                  deleteText();
+                },
+              ),
+              MyButton(
+                buttonText: '%',
+                buttonTapped: () {
+                  updateUserText('%');
+                  uptateTempText();
+                },
+              ),
+              MyButton(
+                buttonText: '÷',
+                buttonTapped: () {
+                  updateUserText('÷');
+                  uptateTempText();
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 70,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MyButton(
+                buttonText: '7',
+                buttonTapped: () {
+                  updateUserText('7');
+                },
+              ),
+              MyButton(
+                buttonText: '8',
+                buttonTapped: () {
+                  updateUserText('8');
+                },
+              ),
+              MyButton(
+                buttonText: '9',
+                buttonTapped: () {
+                  updateUserText('9');
+                },
+              ),
+              MyButton(
+                buttonText: 'x',
+                buttonTapped: () {
+                  updateUserText('x');
+                  uptateTempText();
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 70,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MyButton(
+                buttonText: '4',
+                buttonTapped: () {
+                  updateUserText('4');
+                },
+              ),
+              MyButton(
+                buttonText: '5',
+                buttonTapped: () {
+                  updateUserText('5');
+                },
+              ),
+              MyButton(
+                buttonText: '6',
+                buttonTapped: () {
+                  updateUserText('6');
+                },
+              ),
+              MyButton(
+                buttonText: '-',
+                buttonTapped: () {
+                  updateUserText('-');
+                  uptateTempText();
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 70,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MyButton(
+                buttonText: '1',
+                buttonTapped: () {
+                  updateUserText('1');
+                },
+              ),
+              MyButton(
+                buttonText: '2',
+                buttonTapped: () {
+                  updateUserText('2');
+                },
+              ),
+              MyButton(
+                buttonText: '3',
+                buttonTapped: () {
+                  updateUserText('3');
+                },
+              ),
+              MyButton(
+                buttonText: '+',
+                buttonTapped: () {
+                  updateUserText('+');
+                  uptateTempText();
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 70,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              MyZeroButton(
+                color: numberButtonColor,
+                buttonText: '0',
+                buttonTapped: () {
+                  updateUserText('0');
+                },
+              ),
+              MyButton(
+                buttonText: ',',
+                buttonTapped: () {
+                  updateUserText('.');
+                },
+              ),
+              MyButton(
+                buttonText: '=',
+                buttonTapped: () {
+                  uptateTempText();
+                  _result = Calculate().calculate(_tempText);
+                  killText();
+                  updateUserText(_result.toStringAsFixed(1));
+                },
+              ),
+            ],
+          ),
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 50,
+          ),
+        ],
+      ),
+    );
   }
 }

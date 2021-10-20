@@ -11,16 +11,20 @@ class Calculate {
     if (myOperator == '+') {
       return MathOperation()
           .addition(double.parse(firstPiece), double.parse(secondPiece));
-    } else if (myOperator == '-') {
+    } 
+    else if (myOperator == '-') {
       return MathOperation()
           .substraction(double.parse(firstPiece), double.parse(secondPiece));
-    } else if (myOperator == '÷') {
+    } 
+    else if (myOperator == '÷') {
       return MathOperation()
           .division(double.parse(firstPiece), double.parse(secondPiece));
-    } else if (myOperator == 'x') {
+    } 
+    else if (myOperator == 'x') {
       return MathOperation()
           .multiplication(double.parse(firstPiece), double.parse(secondPiece));
-    } else {
+    } 
+    else {
       return MathOperation()
           .percent(double.parse(firstPiece), double.parse(secondPiece));
     }

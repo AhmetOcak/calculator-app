@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
   
-  final Color color;
   final Color textColor = numberTextColor;
   final String buttonText;
   final VoidCallback buttonTapped;
 
-  const MyButton({required this.color, required this.buttonText, required this.buttonTapped});
+  const MyButton({required this.buttonText, required this.buttonTapped});
 
   @override
   Widget build(BuildContext context) {
@@ -26,11 +25,25 @@ class MyButton extends StatelessWidget {
           style: TextStyle(
             color: textColor,
             fontSize: 40,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ),
-      fillColor: color,
+      fillColor: checkTypeOfButton(buttonText),
     );
   }
 }
+
+Color checkTypeOfButton(String buttonText) {
+    if (buttonText == '+' ||
+        buttonText == '-' ||
+        buttonText == 'x' ||
+        buttonText == '÷' ||
+        buttonText == '=') {
+      return operatorButtonColor;
+    } else if (buttonText == 'C' || buttonText == 'DEL' || buttonText == '%') {
+      return funcButtonColor;
+    } else {
+      return numberButtonColor;
+    }
+  }

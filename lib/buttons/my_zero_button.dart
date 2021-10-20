@@ -28,7 +28,7 @@ class MyZeroButton extends StatelessWidget {
           style: TextStyle(
             color: textColor,
             fontSize: 40,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ),
