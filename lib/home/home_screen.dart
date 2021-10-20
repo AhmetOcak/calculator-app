@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:calculator_app/constants/constants.dart';
 import 'package:calculator_app/buttons/my_button.dart';
+import 'package:calculator_app/result screen/result_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -10,8 +11,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String userText = '111';
-  String firstText = '421421';
+  String userText = '';
+  String tempText = '';
 
   @override
   Widget build(BuildContext context) {
@@ -20,35 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Container(
-                  color: Colors.yellow,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 150,),
-                    child: Text(
-                      firstText, 
-                      style: const TextStyle(fontSize: 45, color: Colors.grey, fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.red,
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      userText, 
-                      style: const TextStyle(fontSize: 90, color: Colors.white, fontWeight: FontWeight.w300),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ResultScreen(tempText: tempText, userText: userText),
           Expanded(
             flex: 3,
             child: Column(
@@ -59,22 +32,32 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: funcButtonColor,
                       buttonText: 'C',
-                      buttonTapped: () {},
+                      buttonTapped: () {
+                        killText();
+                      },
                     ),
                     MyButton(
                       color: funcButtonColor,
                       buttonText: 'DEL',
-                      buttonTapped: () {},
+                      buttonTapped: () {
+                        deleteText();
+                      },
                     ),
                     MyButton(
                       color: funcButtonColor,
                       buttonText: '%',
-                      buttonTapped: () {},
+                      buttonTapped: () {
+                        updateUserText('%');
+                        uptateTempText();
+                      },
                     ),
                     MyButton(
                       color: operatorButtonColor,
                       buttonText: '÷',
-                      buttonTapped: () {},
+                      buttonTapped: () {
+                        updateUserText('÷');
+                        uptateTempText();
+                      },
                     ),
                   ],
                 ),
@@ -87,22 +70,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '7',
-                      buttonTapped: () {updateUserText('7');},
+                      buttonTapped: () {
+                        updateUserText('7');
+                      },
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '8',
-                      buttonTapped: () {updateUserText('8');},
+                      buttonTapped: () {
+                        updateUserText('8');
+                      },
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '9',
-                      buttonTapped: () {updateUserText('9');},
+                      buttonTapped: () {
+                        updateUserText('9');
+                      },
                     ),
                     MyButton(
                       color: operatorButtonColor,
                       buttonText: 'x',
-                      buttonTapped: () {updateUserText('x');},
+                      buttonTapped: () {
+                        updateUserText('x');
+                        uptateTempText();
+                      },
                     ),
                   ],
                 ),
@@ -115,22 +107,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '4',
-                      buttonTapped: () {updateUserText('4');},
+                      buttonTapped: () {
+                        updateUserText('4');
+                      },
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '5',
-                      buttonTapped: () {updateUserText('5');},
+                      buttonTapped: () {
+                        updateUserText('5');
+                      },
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '6',
-                      buttonTapped: () {updateUserText('6');},
+                      buttonTapped: () {
+                        updateUserText('6');
+                      },
                     ),
                     MyButton(
                       color: operatorButtonColor,
                       buttonText: '-',
-                      buttonTapped: () {updateUserText('-');},
+                      buttonTapped: () {
+                        updateUserText('-');
+                        uptateTempText();
+                      },
                     ),
                   ],
                 ),
@@ -143,22 +144,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '1',
-                      buttonTapped: () {updateUserText('1');},
+                      buttonTapped: () {
+                        updateUserText('1');
+                      },
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '2',
-                      buttonTapped: () {updateUserText('2');},
+                      buttonTapped: () {
+                        updateUserText('2');
+                      },
                     ),
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '3',
-                      buttonTapped: () {updateUserText('3');},
+                      buttonTapped: () {
+                        updateUserText('3');
+                      },
                     ),
                     MyButton(
                       color: operatorButtonColor,
                       buttonText: '+',
-                      buttonTapped: () {updateUserText('+');},
+                      buttonTapped: () {
+                        updateUserText('+');
+                        uptateTempText();
+                      },
                     ),
                   ],
                 ),
@@ -171,7 +181,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: '0',
-                      buttonTapped: () {updateUserText('0');},
+                      buttonTapped: () {
+                        updateUserText('0');
+                      },
                     ),
                     MyButton(
                       color: numberButtonColor,
@@ -181,7 +193,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: numberButtonColor,
                       buttonText: ',',
-                      buttonTapped: () {updateUserText('.');},
+                      buttonTapped: () {
+                        updateUserText('.');
+                      },
                     ),
                     MyButton(
                       color: operatorButtonColor,
@@ -216,15 +230,48 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void updateUserText(String text) {
-    if(textLimitControl()) {
+    if (textLimitControl()) {
       setState(() {
-        userText += text;
+        if(isItOperator(text)) {
+          userText += text;
+        }
       });
     }
   }
 
-  bool textLimitControl(){
-    if(userText.length != 8) {
+  void uptateTempText() {
+    setState(() {
+      if(userText.isNotEmpty) {
+        tempText = userText;
+        userText = '';
+      }
+    });
+  }
+
+  void killText() {
+    setState(() {
+      userText = '';
+      tempText = '';
+    });
+  }
+
+  void deleteText() {
+    setState(() {
+      if(userText.isNotEmpty) {
+        userText = userText.substring(0, userText.length - 1);
+      }
+    });
+  }
+
+  bool isItOperator(String text) {
+    if(text != 'x' && text != '÷' && text != '+' && text != '-' && text != '%') {
+      return true;
+    }
+    return false;
+  }
+
+  bool textLimitControl() {
+    if (userText.length != 8) {
       return true;
     }
     return false;
