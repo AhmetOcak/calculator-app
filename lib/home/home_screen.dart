@@ -1,10 +1,11 @@
+import 'package:calculator_app/buttons/my_zero_button.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator_app/constants/constants.dart';
 import 'package:calculator_app/buttons/my_button.dart';
 import 'package:calculator_app/result screen/result_screen.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -178,17 +179,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    MyButton(
+                    MyZeroButton(
                       color: numberButtonColor,
                       buttonText: '0',
                       buttonTapped: () {
                         updateUserText('0');
                       },
-                    ),
-                    MyButton(
-                      color: numberButtonColor,
-                      buttonText: '0',
-                      buttonTapped: () {},
                     ),
                     MyButton(
                       color: numberButtonColor,
@@ -268,7 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   bool isItOperator(String text) {
-    if(text != 'x' && text != '÷' && text != '+' && text != '-' && text != '%') {
+    if(text != 'x' && text != '÷' && text != '+' && text != '-' && text != '%' && text != '.') {
       return false;
     }
     return true;
