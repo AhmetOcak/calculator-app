@@ -232,8 +232,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void updateUserText(String text) {
     if (textLimitControl()) {
       setState(() {
-        if(isItOperator(text)) {
-          userText += text;
+        userText += text;
+        // Prevents the first character from being an operator.
+        if(userText.length == 1) {
+          if(isItOperator(text)) {
+            userText = '';
+          }
         }
       });
     }
@@ -242,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void uptateTempText() {
     setState(() {
       if(userText.isNotEmpty) {
-        tempText = userText;
+        tempText += userText;
         userText = '';
       }
     });
@@ -265,9 +269,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool isItOperator(String text) {
     if(text != 'x' && text != '÷' && text != '+' && text != '-' && text != '%') {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
   bool textLimitControl() {

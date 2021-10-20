@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:calculator_app/constants/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +15,7 @@ class MyButton extends StatelessWidget {
     return RawMaterialButton(
       onPressed: buttonTapped,
       splashColor: splashColor,
-      shape: CircleBorder(),
+      shape: const CircleBorder(),
       constraints: BoxConstraints(
           minHeight: MediaQuery.of(context).size.height / 10,
           minWidth: MediaQuery.of(context).size.width / 4,
