@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:calculator_app/constants/constants.dart';
 import 'package:calculator_app/buttons/my_button.dart';
 import 'package:calculator_app/result screen/result_screen.dart';
+import 'package:calculator_app/math operations/calculate.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String userText = '';
   String tempText = '';
+  double _result = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -196,7 +198,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     MyButton(
                       color: operatorButtonColor,
                       buttonText: '=',
-                      buttonTapped: () {},
+                      buttonTapped: () {
+                        uptateTempText();
+                        _result = Calculate().calculate(tempText);
+                        killText();
+                        updateUserText(_result.toString());
+                      },
                     ),
                   ],
                 ),
