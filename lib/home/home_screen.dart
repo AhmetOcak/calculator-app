@@ -90,6 +90,29 @@ class _HomeScreenState extends State<HomeScreen> {
     return false;
   }
 
+  bool operatorControl(String text) {
+    String plus = '+';
+    String minus = '-';
+    String multpily = '÷';
+    String divide = 'x';
+    String percent = '%';
+    print(plus.allMatches(text).isNotEmpty);
+    if(plus.allMatches(text).isNotEmpty || minus.allMatches(text).isNotEmpty || multpily.allMatches(text).isNotEmpty ||  divide.allMatches(text).isNotEmpty || percent.allMatches(text).isNotEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  // It prevents possible errors caused by the equal sign.
+  bool equalControl() {
+    if(_userText.isNotEmpty && '='.allMatches(_userText).length < 2 && operatorControl(_tempText)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  }
+
   Expanded buttonScreen(BuildContext context) {
     return Expanded(
       flex: 3,
@@ -247,10 +270,12 @@ class _HomeScreenState extends State<HomeScreen> {
               MyButton(
                 buttonText: '=',
                 buttonTapped: () {
-                  uptateTempText();
-                  _result = Calculate().calculate(_tempText);
-                  killText();
-                  updateUserText(_result.toStringAsFixed(1));
+                  if(equalControl()) {
+                    uptateTempText();
+                    _result = Calculate().calculate(_tempText);
+                    killText();
+                    updateUserText(_result.toStringAsFixed(1));
+                  }
                 },
               ),
             ],
