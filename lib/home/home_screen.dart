@@ -89,14 +89,15 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return false;
   }
-
+  
+  // It prevents possible errors caused by the equal sign.
   bool operatorControl(String text) {
     String plus = '+';
     String minus = '-';
     String multpily = '÷';
     String divide = 'x';
     String percent = '%';
-    print(plus.allMatches(text).isNotEmpty);
+
     if(plus.allMatches(text).isNotEmpty || minus.allMatches(text).isNotEmpty || multpily.allMatches(text).isNotEmpty ||  divide.allMatches(text).isNotEmpty || percent.allMatches(text).isNotEmpty) {
       return true;
     }
