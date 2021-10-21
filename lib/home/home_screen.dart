@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
     return false;
   }
-  
+
   // It prevents possible errors caused by the equal sign.
   bool operatorControl(String text) {
     String plus = '+';
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // It prevents possible errors caused by the equal sign.
   bool equalControl() {
-    if(_userText.isNotEmpty && '='.allMatches(_userText).length < 2 && operatorControl(_tempText)) {
+    if(_userText.isNotEmpty && operatorControl(_tempText)) {
       return true;
     }
     else {
